@@ -9,7 +9,7 @@
     <div class="container">
         <div class="row">
             <div class="col-3 p-5">
-                <img src={{ $user->profile->profileImage() }} class="rounded-circle w-100">
+                <img src={{ $user->profileImage }} class="rounded-circle w-100">
             </div>
             <div class="col-9 p-5 ">
                 <div class="d-flex justify-content-between align-items-baseline">
@@ -18,7 +18,7 @@
 
                         <div class="h4">{{ $user->username }}</div>
 
-                        <button class="btn btn-primary ml-4">Follow</button>
+                    <follow-button user-id="{{ $user->id }}" follows="{{ $follows }}"></follow-button>
 
                     </div>
                    

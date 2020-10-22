@@ -6,6 +6,7 @@ use Illuminate\Contracts\Auth\MustVerifyEmail;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Foundation\Auth\User as Authenticatable;
 use Illuminate\Notifications\Notifiable;
+use PhpParser\Builder\Function_;
 
 class User extends Authenticatable
 {
@@ -59,9 +60,17 @@ class User extends Authenticatable
         return $this->profile->profileImage();
     }
 
+
+
     public function posts()
     {
       return $this->hasMany(Post::class)->orderBy('created_at', 'DESC'); 
+    }
+
+
+    public function following()
+    {
+        return $this->belongsToMany(Profile::class);
     }
 
     public function profile()
@@ -71,4 +80,6 @@ class User extends Authenticatable
         ]);
         return $this->hasOne(Profile::class);
     }
+
+    
 }
