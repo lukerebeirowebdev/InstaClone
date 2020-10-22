@@ -30,20 +30,24 @@ class ProfilesController extends Controller
             'title' => 'required',
             'description' => 'required',
             'url' => 'url',
-            'image' => '' // TODO: Image validation?
+            'image' => '' 
         ]);
 
         if (request('image'))
         {
+
         $imagePath = request('image')->store('profile', 'public');
+
         $image = Image::make(public_path("storage/{$imagePath}"))->fit(1000, 1000);
         $image->save();
+
+        $imageArray = ['image' => $imagePath];
         }
 
-        // TODO: Check if user has permission to edit this profile
 
         $user->profile->update(array_merge(
-            $data, ['image' => $imagePath]
+            $data,
+            $imageArray ?? []
         ));
 
         return redirect()->route('profile.show', $user->id);
