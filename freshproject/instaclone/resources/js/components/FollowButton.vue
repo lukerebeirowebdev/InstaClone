@@ -34,7 +34,7 @@
 
                 .catch(errors => {
                     if (errors.response.status = 401) {
-                        window.location = '/login'
+                        window.location = '/login';
 
                     }
                 });
